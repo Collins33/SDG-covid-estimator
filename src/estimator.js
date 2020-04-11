@@ -10,7 +10,7 @@
 //   timeToElapse: 58,
 //   reportedCases: 674,
 //   population: 66622705,
-//   totalHospitalBeds: 1380614
+//   totalHospitalBeds: 1380614 
 //   }
 
 /**
