@@ -10,15 +10,9 @@
 //   timeToElapse: 58,
 //   reportedCases: 674,
 //   population: 66622705,
-//   totalHospitalBeds: 1380614 
+//   totalHospitalBeds: 1380614
 //   }
 
-/**
- * @method convertToDays
- * @summary - converts weeks and months into days
- * @param int time, string periodType
- * @returns time in minutes
- */
 const convertToDays = (time, periodType) => {
   if (periodType === 'days') {
     return time;
@@ -33,23 +27,12 @@ const convertToDays = (time, periodType) => {
   return time;
 };
 
-/**
- * @method severeCasesByTime
- * @summary - determines positive cases that need hospitalization
- * @param int infectionsByTime
- * @returns 15 percent of infections by time
- */
 const severeCasesByTime = (infectionsByTime) => (15 / 100) * infectionsByTime;
 
-/**
- * @method hospitalBedsByTime
- * @summary - determines available hospital cases based on severe cases
- * @param int severeCasesByRequestedTime, int totalHospitalBeds
- * @returns available hospital beds
- */
 const hospitalBedsByTime = (severeCasesByRequestedTime, totalHospitalBeds) => {
   const availableBeds = (35 / 100) * totalHospitalBeds;
-  return availableBeds - severeCasesByRequestedTime;
+  const answer = Math.floor(availableBeds) - severeCasesByRequestedTime;
+  return Math.sign(answer) === -1 ? answer + 1 : answer;
 };
 
 
