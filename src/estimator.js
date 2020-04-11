@@ -31,7 +31,8 @@ const severeCasesByTime = (infectionsByTime) => (15 / 100) * infectionsByTime;
 
 const hospitalBedsByTime = (severeCasesByRequestedTime, totalHospitalBeds) => {
   const availableBeds = (35 / 100) * totalHospitalBeds;
-  return Math.floor(availableBeds) - severeCasesByRequestedTime + 1;
+  const answer = Math.floor(availableBeds) - severeCasesByRequestedTime + 1;
+  return Math.sign(answer) === -1 ? answer + 1 : answer;
 };
 
 
