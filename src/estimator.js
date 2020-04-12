@@ -36,12 +36,12 @@ const hospitalBedsByTime = (severeCasesByRequestedTime, totalHospitalBeds) => {
 };
 
 const casesThatNeedICU = (infectionsByRequestedTime) => {
-  const cases = Math.floor((5 / 100) * infectionsByRequestedTime);
+  const cases = (5 / 100) * infectionsByRequestedTime;
   return cases;
 };
 
 const needVentilators = (infectionsByRequestedTime) => {
-  const cases = Math.floor((2 / 100) * infectionsByRequestedTime);
+  const cases = (2 / 100) * infectionsByRequestedTime;
   return cases;
 };
 
