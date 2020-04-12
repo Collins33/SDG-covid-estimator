@@ -35,11 +35,16 @@ const hospitalBedsByTime = (severeCasesByRequestedTime, totalHospitalBeds) => {
   return Math.sign(answer) === -1 ? answer + 1 : answer;
 };
 
+const casesThatNeedICU = (infectionsByRequestedTime) => (5 / 100) * infectionsByRequestedTime;
+
+const needVentilators = (infectionsByRequestedTime) => (2 / 100) * infectionsByRequestedTime;
 
 const covid19ImpactEstimator = (data) => {
   const {
     reportedCases, timeToElapse, periodType, totalHospitalBeds
   } = data;
+
+
   // calculate the currently infected for impact and severe
   const impactCurrentlyInfected = reportedCases * 10;
   const severeCurrentlyInfected = reportedCases * 50;
@@ -53,6 +58,13 @@ const covid19ImpactEstimator = (data) => {
 
   const impactSevereCasesByRequestedTime = severeCasesByTime(impactInfectionsByRequestedTime);
   const severeImpactSevereCasesByRequestedTime = severeCasesByTime(severeInfectionsByRequestedTime);
+
+  const impactCasesForICUByRequestedTime = casesThatNeedICU(impactInfectionsByRequestedTime);
+
+  const severeCasesForICUByRequestedTime = casesThatNeedICU(severeInfectionsByRequestedTime);
+
+  const impactForVentilatorsByRequestedTime = needVentilators(impactInfectionsByRequestedTime);
+  const severeForVentilatorsByRequestedTime = needVentilators(impactInfectionsByRequestedTime);
 
   const impactHospitalBedsByRequestedTime = hospitalBedsByTime(
     impactSevereCasesByRequestedTime,
@@ -69,13 +81,17 @@ const covid19ImpactEstimator = (data) => {
       currentlyInfected: impactCurrentlyInfected,
       infectionsByRequestedTime: impactInfectionsByRequestedTime,
       severeCasesByRequestedTime: impactSevereCasesByRequestedTime,
-      hospitalBedsByRequestedTime: impactHospitalBedsByRequestedTime
+      hospitalBedsByRequestedTime: impactHospitalBedsByRequestedTime,
+      casesForICUByRequestedTime: impactCasesForICUByRequestedTime,
+      casesForVentilatorsByRequestedTime: impactForVentilatorsByRequestedTime
     }, // your best case estimation
     severeImpact: {
       currentlyInfected: severeCurrentlyInfected,
       infectionsByRequestedTime: severeInfectionsByRequestedTime,
       severeCasesByRequestedTime: severeImpactSevereCasesByRequestedTime,
-      hospitalBedsByRequestedTime: severeHospitalBedsByRequestedTime
+      hospitalBedsByRequestedTime: severeHospitalBedsByRequestedTime,
+      casesForICUByRequestedTime: severeCasesForICUByRequestedTime,
+      casesForVentilatorsByRequestedTime: severeForVentilatorsByRequestedTime
     } // your severe case estimation
   };
   return output;
