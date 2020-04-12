@@ -44,7 +44,7 @@ const casesThatNeedICU = (infectionsByRequestedTime) => {
 const needVentilators = (infectionsByRequestedTime) => {
   const cases = (2 / 100) * infectionsByRequestedTime;
   console.log('ventilators..........', cases);
-  return Math.floor(cases);
+  return cases;
 };
 
 const economicEffect = (
