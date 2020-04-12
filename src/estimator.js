@@ -43,7 +43,7 @@ const casesThatNeedICU = (infectionsByRequestedTime) => {
 
 const needVentilators = (infectionsByRequestedTime) => {
   const cases = (2 / 100) * infectionsByRequestedTime;
-  console.log('ventilators..........', cases);
+  console.log('ventilators..........', Math.floor(cases));
   return cases;
 };
 
