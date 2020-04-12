@@ -56,6 +56,7 @@ const economicEffect = (
 };
 
 const covid19ImpactEstimator = (data) => {
+  console.log(data)
   const {
     reportedCases,
     timeToElapse,
