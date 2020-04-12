@@ -88,7 +88,7 @@ const covid19ImpactEstimator = (data) => {
   const severeCasesForICUByRequestedTime = casesThatNeedICU(severeInfectionsByRequestedTime);
 
   const impactForVentilatorsByRequestedTime = needVentilators(impactInfectionsByRequestedTime);
-  const severeForVentilatorsByRequestedTime = needVentilators(impactInfectionsByRequestedTime);
+  const severeForVentilatorsByRequestedTime = needVentilators(severeInfectionsByRequestedTime);
 
   const impactEconomy = economicEffect(impactInfectionsByRequestedTime,
     avgDailyIncomeInUSD,
