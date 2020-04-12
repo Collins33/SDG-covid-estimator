@@ -35,9 +35,15 @@ const hospitalBedsByTime = (severeCasesByRequestedTime, totalHospitalBeds) => {
   return Math.sign(answer) === -1 ? answer + 1 : answer;
 };
 
-const casesThatNeedICU = (infectionsByRequestedTime) => (5 / 100) * infectionsByRequestedTime;
+const casesThatNeedICU = (infectionsByRequestedTime) => {
+  const cases = Math.floor((5 / 100) * infectionsByRequestedTime);
+  return cases;
+};
 
-const needVentilators = (infectionsByRequestedTime) => (2 / 100) * infectionsByRequestedTime;
+const needVentilators = (infectionsByRequestedTime) => {
+  const cases = Math.floor((2 / 100) * infectionsByRequestedTime);
+  return cases;
+};
 
 const economicEffect = (
   casesByTime,
