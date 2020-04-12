@@ -46,7 +46,7 @@ const economicEffect = (
   time
 ) => {
   const dollarEffect = (casesByTime * dailyIncome * population) / time;
-  return dollarEffect;
+  return Math.floor(dollarEffect);
 };
 
 const covid19ImpactEstimator = (data) => {
