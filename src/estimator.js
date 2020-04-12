@@ -39,9 +39,23 @@ const casesThatNeedICU = (infectionsByRequestedTime) => (5 / 100) * infectionsBy
 
 const needVentilators = (infectionsByRequestedTime) => (2 / 100) * infectionsByRequestedTime;
 
+const economicEffect = (
+  casesByTime,
+  dailyIncome,
+  population,
+  time
+) => {
+  const dollarEffect = (casesByTime * dailyIncome * population) / time;
+  return dollarEffect;
+};
+
 const covid19ImpactEstimator = (data) => {
   const {
-    reportedCases, timeToElapse, periodType, totalHospitalBeds
+    reportedCases,
+    timeToElapse,
+    periodType,
+    totalHospitalBeds,
+    region: { avgDailyIncomeInUSD, avgDailyIncomePopulation }
   } = data;
 
 
@@ -66,6 +80,16 @@ const covid19ImpactEstimator = (data) => {
   const impactForVentilatorsByRequestedTime = needVentilators(impactInfectionsByRequestedTime);
   const severeForVentilatorsByRequestedTime = needVentilators(impactInfectionsByRequestedTime);
 
+  const impactEconomy = economicEffect(impactInfectionsByRequestedTime,
+    avgDailyIncomeInUSD,
+    avgDailyIncomePopulation,
+    timeComputation);
+
+  const severeEconomy = economicEffect(severeInfectionsByRequestedTime,
+    avgDailyIncomeInUSD,
+    avgDailyIncomePopulation,
+    timeComputation);
+
   const impactHospitalBedsByRequestedTime = hospitalBedsByTime(
     impactSevereCasesByRequestedTime,
     totalHospitalBeds
@@ -83,7 +107,8 @@ const covid19ImpactEstimator = (data) => {
       severeCasesByRequestedTime: impactSevereCasesByRequestedTime,
       hospitalBedsByRequestedTime: impactHospitalBedsByRequestedTime,
       casesForICUByRequestedTime: impactCasesForICUByRequestedTime,
-      casesForVentilatorsByRequestedTime: impactForVentilatorsByRequestedTime
+      casesForVentilatorsByRequestedTime: impactForVentilatorsByRequestedTime,
+      dollarsInFlight: impactEconomy
     }, // your best case estimation
     severeImpact: {
       currentlyInfected: severeCurrentlyInfected,
@@ -91,7 +116,8 @@ const covid19ImpactEstimator = (data) => {
       severeCasesByRequestedTime: severeImpactSevereCasesByRequestedTime,
       hospitalBedsByRequestedTime: severeHospitalBedsByRequestedTime,
       casesForICUByRequestedTime: severeCasesForICUByRequestedTime,
-      casesForVentilatorsByRequestedTime: severeForVentilatorsByRequestedTime
+      casesForVentilatorsByRequestedTime: severeForVentilatorsByRequestedTime,
+      dollarsInFlight: severeEconomy
     } // your severe case estimation
   };
   return output;
