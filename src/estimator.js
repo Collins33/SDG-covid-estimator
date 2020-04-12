@@ -37,11 +37,13 @@ const hospitalBedsByTime = (severeCasesByRequestedTime, totalHospitalBeds) => {
 
 const casesThatNeedICU = (infectionsByRequestedTime) => {
   const cases = (5 / 100) * infectionsByRequestedTime;
+  console.log('ICU..........', cases);
   return cases;
 };
 
 const needVentilators = (infectionsByRequestedTime) => {
   const cases = (2 / 100) * infectionsByRequestedTime;
+  console.log('ventilators..........', cases);
   return cases;
 };
 
@@ -52,6 +54,7 @@ const economicEffect = (
   time
 ) => {
   const dollarEffect = (casesByTime * dailyIncome * population) / time;
+  console.log('economy......', Math.floor(dollarEffect));
   return Math.floor(dollarEffect);
 };
 
