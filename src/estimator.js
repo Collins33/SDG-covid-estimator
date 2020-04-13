@@ -1,17 +1,3 @@
-// Expected data
-// {
-//   region: {
-//   name: "Africa",
-//   avgAge: 19.7,
-//   avgDailyIncomeInUSD: 5,
-//   avgDailyIncomePopulation: 0.71
-//   },
-//   periodType: "days",
-//   timeToElapse: 58,
-//   reportedCases: 674,
-//   population: 66622705,
-//   totalHospitalBeds: 1380614
-//   }
 
 const convertToDays = (time, periodType) => {
   if (periodType === 'days') {
@@ -37,13 +23,11 @@ const hospitalBedsByTime = (severeCasesByRequestedTime, totalHospitalBeds) => {
 
 const casesThatNeedICU = (infectionsByRequestedTime) => {
   const cases = (5 / 100) * infectionsByRequestedTime;
-  console.log('ICU..........', cases);
   return cases;
 };
 
 const needVentilators = (infectionsByRequestedTime) => {
   const cases = (2 / 100) * infectionsByRequestedTime;
-  console.log('ventilators..........', Math.floor(cases));
   return Math.floor(cases);
 };
 
@@ -54,12 +38,10 @@ const economicEffect = (
   time
 ) => {
   const dollarEffect = (casesByTime * dailyIncome * population) / time;
-  console.log('economy......', Math.floor(dollarEffect));
   return Math.floor(dollarEffect);
 };
 
-const covid19ImpactEstimator = (data) => {
-  console.log(data);
+exports.covid19ImpactEstimator = (data) => {
   const {
     reportedCases,
     timeToElapse,
@@ -132,5 +114,3 @@ const covid19ImpactEstimator = (data) => {
   };
   return output;
 };
-
-export default covid19ImpactEstimator;
