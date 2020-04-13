@@ -25,7 +25,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/v1/on-covid-19", covidRoutes);
+app.use("/api/v1/on-covid-19/", covidRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({
