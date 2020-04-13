@@ -8,7 +8,6 @@ const covid19ImpactEstimator = require('../estimator');
  */
 
 exports.disease_estimator = (req, res) => {
-  console.log(req.body);
   const {
     region: {
       name,
