@@ -1,4 +1,3 @@
-
 const convertToDays = (time, periodType) => {
   if (periodType === 'days') {
     return time;

@@ -1,4 +1,4 @@
-// const covid19ImpactEstimator = require('../estimator');
+const covid19ImpactEstimator = require('../estimator');
 
 /**
  * @method disease_estimator
@@ -8,7 +8,30 @@
  */
 
 exports.disease_estimator = (req, res) => {
-  res.status(200).json({
-    message: 'we are here'
-  });
+  const {
+    name,
+    avgAge,
+    avgDailyIncomeInUSD,
+    avgDailyIncomePopulation,
+    periodType,
+    timeToElapse,
+    reportedCases,
+    population,
+    totalHospitalBeds
+  } = req.body;
+  const data = {
+    region: {
+      name,
+      avgAge,
+      avgDailyIncomeInUSD,
+      avgDailyIncomePopulation
+    },
+    periodType,
+    timeToElapse,
+    reportedCases,
+    population,
+    totalHospitalBeds
+  };
+  const response = covid19ImpactEstimator(data);
+  res.status(200).json(response);
 };
