@@ -41,7 +41,7 @@ const economicEffect = (
   return Math.floor(dollarEffect);
 };
 
-exports.covid19ImpactEstimator = (data) => {
+const covid19ImpactEstimator = (data) => {
   const {
     reportedCases,
     timeToElapse,
@@ -114,3 +114,6 @@ exports.covid19ImpactEstimator = (data) => {
   };
   return output;
 };
+
+// export default covid19ImpactEstimator;
+module.exports = covid19ImpactEstimator;
