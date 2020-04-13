@@ -111,7 +111,6 @@ const covid19ImpactEstimator = (data) => {
       dollarsInFlight: severeEconomy
     } // your severe case estimation
   };
-  console.log(output);
   return output;
 };
 
